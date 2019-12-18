@@ -1,4 +1,4 @@
-As an argument, we need to pass 20 bytes for 5 integers to the col binary.
+As an argument, we need to pass 20 bytes for 5 integers to the col binary that'll result the expected hash-sum.
 
 Along with the script, challange can be solved with the following one-liner as well:
 ```
