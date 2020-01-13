@@ -1,7 +1,7 @@
 The binary has the following security properties:
 ```
 uzi@pwnpatrol:$ checksec --file bof
-[*] '/home/uzi/bof/bof'
+[*] '/home/uzi/challenges/wargames/pwnable.kr/toddlers_bottle/bof/bof'
     Arch:     i386-32-little
     RELRO:    Partial RELRO
     Stack:    Canary found
