@@ -1,5 +1,5 @@
 In this challenge, we need to login to an application with two passcodes. In description of game, it's said that they ignored compiler warning (due to no reference passed to scanf) <br/>
-We check the security properties and see that there's stack buffer overflow protection and code execution prevention.
+We check the security properties and see that there's stack buffer overflow protection and code execution prevention. It's good that RELRO is partial and there's no PIE.
 ```
 uzi@pwnpatrol:$ checksec passcode
 [*] '/home/uzi/challenges/wargames/pwnable.kr/toddlers_bottle/5.passcode/passcode'
