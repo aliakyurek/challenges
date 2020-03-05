@@ -22,4 +22,12 @@ can be used to manipulate behaviour of login. So this is the stack frame of `wel
 
 If there was only the first and single passcode check, we could pass this challenge by:
 * Handcrafting a 100 bytes payload in `welcome` where the last 4 bytes are same as `passcode1`.
-* Not providing an integer input for `scanf("%d", passcode1);` so that scanf will not try to update the value pointed by `passcode1`. As said in the beginning, this is the programming error compiler warns. If you provide an integer other than the address of a writable memory region, to those `scanf`s, there will be a segmentation fault.
+* Not providing an integer input for `scanf("%d", passcode1);` so that scanf will not try to update the value pointed by `passcode1`. Actually, as said in the beginning, this is the programming error compiler warns. If you provide an integer other than the address of a writable memory region, to those `scanf`s, there will be a segmentation fault since passcodes passed by value instead of reference.
+
+We should exploit the programming error. What do have regarding `passcode1`
+* We can control the content of passcode1.
+* We can provide data that's written to the location pointed by passcode1
+
+This is called as **writing an arbitrary value to an arbitrary location**, and it's very powerful.
+
+
